@@ -1,0 +1,7 @@
+app.yml
+*.log
+data/
+.DS_Store
+docker_*.sh
+.git/
+.git*
