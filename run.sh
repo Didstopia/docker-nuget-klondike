@@ -3,20 +3,27 @@
 set -e
 set -o pipefail
 
-#SOURCE="/app"
-#TARGET="/data"
-#SETTINGS_FILE="Settings.config"
+SOURCE="/app"
+TARGET="/data"
+SETTINGS_FILE="Settings.config"
 
-#if [ ! -f "$TARGET/$SETTINGS_FILE" ]; then
-#	echo "Fresh install detected, applying default configuration.."
-#	cp -f $SOURCE/$SETTINGS_FILE $TARGET/$SETTINGS_FILE
-#	rm -f $SOURCE/$SETTINGS_FILE
-#fi
+if [ ! -f "$TARGET/$SETTINGS_FILE" ]; then
+	echo "Fresh install detected, applying default configuration.."
+	cp -f $SOURCE/$SETTINGS_FILE $TARGET/$SETTINGS_FILE
+	rm -f $SOURCE/$SETTINGS_FILE
+fi
 
-#ln -sf $TARGET/$SETTINGS_FILE $SOURCE/$SETTINGS_FILE
+# Update the symlink
+ln -sf $TARGET/$SETTINGS_FILE $SOURCE/$SETTINGS_FILE
 
-#nginx
+# Start nginx
+nginx
 
-exec mono /app/bin/Klondike.SelfHost.exe --interactive --port=8080 &
+# Setup FIFO (fixes stdin issues with Klondike's interactive mode)
+fifo=$PWD/fifo.tmp
+mkfifo $fifo
+exec 3<> $fifo
+rm -f $fifo
 
-nginx -g 'daemon off;'
+# Run Klondike as the 'klondike' user
+su klondike -c "mono /app/bin/Klondike.SelfHost.exe --interactive --port=8080 <&3"
