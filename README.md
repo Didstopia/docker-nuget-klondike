@@ -10,7 +10,7 @@ This image is based on [docker-klondike](https://github.com/athieriot/docker-klo
 
 Sample usage:
 ```
-docker run -p 8080:80 -v /my/host/data:/data --name nuget-klondike -d didstopia/nuget-klondike:latest
+docker run -p 8080:80 -v /my/host/klondike/Settings.config:/app/Settings.config -v /my/host/klondike/data:/data --name nuget-klondike -d didstopia/nuget-klondike:latest
 ```
 
 The first time this image runs, it will create a `Settings.config` file under the `/data` folder, which you can customize and restart to apply your changes.

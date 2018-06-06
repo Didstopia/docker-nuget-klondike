@@ -3,18 +3,18 @@
 set -e
 set -o pipefail
 
-SOURCE="/app"
-TARGET="/data"
-SETTINGS_FILE="Settings.config"
+#SOURCE="/app"
+#TARGET="/data"
+#SETTINGS_FILE="Settings.config"
 
-if [ ! -f "$TARGET/$SETTINGS_FILE" ]; then
-	echo "Fresh install detected, applying default configuration.."
-	cp -f $SOURCE/$SETTINGS_FILE $TARGET/$SETTINGS_FILE
-	rm -f $SOURCE/$SETTINGS_FILE
-fi
+#if [ ! -f "$TARGET/$SETTINGS_FILE" ]; then
+#	echo "Fresh install detected, applying default configuration.."
+#	cp -f $SOURCE/$SETTINGS_FILE $TARGET/$SETTINGS_FILE
+#	rm -f $SOURCE/$SETTINGS_FILE
+#fi
 
 # Update the symlink
-ln -sf $TARGET/$SETTINGS_FILE $SOURCE/$SETTINGS_FILE
+#ln -sf $TARGET/$SETTINGS_FILE $SOURCE/$SETTINGS_FILE
 
 # Start nginx
 nginx

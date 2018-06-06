@@ -52,15 +52,15 @@ RUN rm -fr /usr/share/nginx/html/* && \
 COPY nginx_klondike.conf /etc/nginx/nginx.conf
 
 # Setup default user
-RUN addgroup -g 1000 klondike && \
-    adduser -u 1000 -G klondike -s /bin/sh -D klondike
+RUN addgroup -g 500 klondike && \
+    adduser -u 500 -G klondike -s /bin/sh -D klondike
 
 # Setup volumes
 VOLUME /data
 
 # Install Klondike
 RUN mkdir -p /app
-RUN wget --no-check-certificate https://github.com/themotleyfool/Klondike/releases/download/${KLONDIKE_VERSION}/Klondike.${KLONDIKE_BUILD}.zip -O /app/Klondike.${KLONDIKE_BUILD}.zip && \
+RUN wget --no-check-certificate https://github.com/chriseldredge/Klondike/releases/download/${KLONDIKE_VERSION}/Klondike.${KLONDIKE_BUILD}.zip -O /app/Klondike.${KLONDIKE_BUILD}.zip && \
     unzip /app/Klondike.${KLONDIKE_BUILD}.zip -d /app && \
 	rm -f /app/*.zip
 
