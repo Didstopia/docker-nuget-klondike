@@ -1,5 +1,7 @@
 # NuGet Server with Klondike for Docker
 
+*Show your support for this project by signing up for a [free Bitrise account!](https://app.bitrise.io?referrer=02c20c56fa07adcb)*
+
 Provides a clean and easy way to run your own public/private NuGet repository with [Klondike](https://github.com/themotleyfool/Klondike) as the frontend, all inside a Docker container.
 
 This image is based on [docker-klondike](https://github.com/athieriot/docker-klondike), adding easier configuration, volume mounting and optional authentication.
