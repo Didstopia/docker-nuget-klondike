@@ -1,5 +1,5 @@
-#FROM didstopia/base:alpine-3.5
-FROM alpine:3.9
+FROM didstopia/base:alpine-3.5
+#FROM alpine:3.9
 
 MAINTAINER Didstopia <support@didstopia.com>
 
@@ -18,10 +18,13 @@ RUN apk add --no-cache \
     busybox-suid \
     unzip \
     bash \
-	wget \
-	nginx \
-	apache2-utils \
-	mono
+		wget \
+		nginx \
+		apache2-utils \
+		mono
+
+# Fix mono issues on Alpine 3.5
+RUN apk add --no-cache musl\>1.1.20 --repository http://dl-cdn.alpinelinux.org/alpine/edge/main
 
 # Install Mono
 #RUN apk add --no-cache --virtual=.build-dependencies \
@@ -45,9 +48,9 @@ RUN apk add --no-cache \
 
 # Remove default nginx stuff
 RUN rm -fr /usr/share/nginx/html/* && \
-	rm -fr /etc/nginx/sites-available/* && \
-	rm -fr /etc/nginx/sites-enabled/* && \
-	mkdir -p /run/nginx
+		rm -fr /etc/nginx/sites-available/* && \
+		rm -fr /etc/nginx/sites-enabled/* && \
+		mkdir -p /run/nginx
 
 # Use a custom nginx configuration
 COPY nginx_klondike.conf /etc/nginx/nginx.conf
@@ -63,7 +66,7 @@ VOLUME /data
 RUN mkdir -p /app
 RUN wget --no-check-certificate https://github.com/chriseldredge/Klondike/releases/download/${KLONDIKE_VERSION}/Klondike.${KLONDIKE_BUILD}.zip -O /app/Klondike.${KLONDIKE_BUILD}.zip && \
     unzip /app/Klondike.${KLONDIKE_BUILD}.zip -d /app && \
-	rm -f /app/*.zip
+		rm -f /app/*.zip
 
 # Overwrite the default settings
 COPY Settings.config /app/Settings.config

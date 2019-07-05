@@ -3,6 +3,9 @@
 set -e
 set -o pipefail
 
+# Create directory structure
+mkdir -p /data/packages /data/caches
+
 # Fix permissions
 chown -R klondike:klondike /data
 
