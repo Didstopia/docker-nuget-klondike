@@ -1,4 +1,4 @@
-FROM didstopia/base:alpine-3.5
+FROM didstopia/base:alpine-3.9
 
 MAINTAINER Didstopia <support@didstopia.com>
 
