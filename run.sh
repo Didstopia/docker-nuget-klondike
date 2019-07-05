@@ -3,6 +3,9 @@
 set -e
 set -o pipefail
 
+# Fix permissions
+chown -R klondike:klondike /app
+
 #SOURCE="/app"
 #TARGET="/data"
 #SETTINGS_FILE="Settings.config"
