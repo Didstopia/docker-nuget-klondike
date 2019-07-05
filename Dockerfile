@@ -1,5 +1,7 @@
-FROM didstopia/base:alpine-3.5
-#FROM alpine:3.9
+# FROM didstopia/base:alpine-3.5
+FROM didstopia/base:alpine-edge
+# FROM alpine:3.9
+# FROM frolvlad/alpine-mono
 
 MAINTAINER Didstopia <support@didstopia.com>
 
@@ -21,24 +23,24 @@ RUN apk add --no-cache \
 		wget \
 		nginx \
 		apache2-utils \
+		musl \
 		mono
 
 # Fix mono issues on Alpine 3.5
-RUN apk add --no-cache musl\>1.1.20 --repository http://dl-cdn.alpinelinux.org/alpine/edge/main
+# RUN apk add --no-cache musl\>1.1.20 --repository http://dl-cdn.alpinelinux.org/alpine/edge/main
 
 # Install Mono
-#RUN apk add --no-cache --virtual=.build-dependencies \
-#	wget \
-#	ca-certificates \
-#	tar \
-#	xz && \
-#   wget "https://www.archlinux.org/packages/extra/x86_64/mono/download/" -O "/tmp/mono.pkg.tar.xz" && \
-#   tar -xJf "/tmp/mono.pkg.tar.xz" && \
-#   cert-sync /etc/ssl/certs/ca-certificates.crt && \
-#   apk del .build-dependencies && \
-#   rm /tmp/*
+# RUN apk add --no-cache --virtual=.build-dependencies \
+# 		ca-certificates \
+# 		tar \
+# 		xz && \
+# 		wget "https://www.archlinux.org/packages/extra/x86_64/mono/download/" -O "/tmp/mono.pkg.tar.xz" && \
+# 		tar -xJf "/tmp/mono.pkg.tar.xz" && \
+# 		cert-sync /etc/ssl/certs/ca-certificates.crt && \
+# 		apk del .build-dependencies && \
+# 		rm /tmp/*
 
-#RUN apt-get update && \
+# RUN apt-get update && \
 #	apt-get upgrade -y && \
 #	apt-get autoremove -y && \
 #	apt-get install -y \
