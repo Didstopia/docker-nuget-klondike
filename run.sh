@@ -4,7 +4,7 @@ set -e
 set -o pipefail
 
 # Fix permissions
-chown -R klondike:klondike /app
+chown -R klondike:klondike /data
 
 #SOURCE="/app"
 #TARGET="/data"
