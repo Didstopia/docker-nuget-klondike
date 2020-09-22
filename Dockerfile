@@ -20,11 +20,15 @@ RUN apk add --no-cache \
     busybox-suid \
     unzip \
     bash \
-		wget \
-		nginx \
-		apache2-utils \
-		musl \
-		mono
+    wget \
+    nginx \
+    apache2-utils \
+    musl \
+    mono
+
+# Fix incorrect mono library path
+RUN cat /etc/mono/config
+RUN sed -i 's/libmono-native.so/libmono-native.so.0/g' /etc/mono/config
 
 # Fix mono issues on Alpine 3.5
 # RUN apk add --no-cache musl\>1.1.20 --repository http://dl-cdn.alpinelinux.org/alpine/edge/main
